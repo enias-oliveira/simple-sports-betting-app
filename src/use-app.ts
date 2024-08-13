@@ -1,7 +1,10 @@
 import { useState } from "react";
+import { ResponseType, SelectionType } from "./types";
+import { useAppDispatch, useAppSelector } from "./store/hooks";
+import { addSelection, selectSelections } from "./store/slices/selectionsSlice";
 
 export const useApp = () => {
-  const [events] = useState([
+  const [events] = useState<ResponseType>([
     {
       id: "EVT_1",
       name: "Real Madrid vs Barcelona",
@@ -74,5 +77,12 @@ export const useApp = () => {
     },
   ]);
 
-  return { events };
+  const selections = useAppSelector(selectSelections);
+
+  const dispatch = useAppDispatch();
+
+  const handleAddSelection = (selection: SelectionType) =>
+    dispatch(addSelection(selection));
+
+  return { events, selections, handleAddSelection };
 };

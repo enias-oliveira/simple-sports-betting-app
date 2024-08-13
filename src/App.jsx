@@ -1,7 +1,7 @@
 import { useApp } from "./use-app";
 
 export const App = () => {
-  const { events } = useApp();
+  const { events, selections, handleAddSelection } = useApp();
 
   return (
     <div>
@@ -18,7 +18,11 @@ export const App = () => {
                     {market.name}
                     <div className="flex">
                       {market.selections.map((selection) => (
-                        <button key={selection.id} className="flex flex-col">
+                        <button
+                          key={selection.id}
+                          className="flex flex-col"
+                          onClick={() => handleAddSelection(selection)}
+                        >
                           <div>{selection.name}</div>
                           <div>{selection.price}</div>
                         </button>
@@ -32,6 +36,12 @@ export const App = () => {
       </div>
       <div>
         <div>Selections</div>
+        {selections.map((userSelection) => (
+          <div key={userSelection.id} className="flex flex-col">
+            <div>{userSelection.name}</div>
+            <div>{userSelection.price}</div>
+          </div>
+        ))}
       </div>
     </div>
   );
