@@ -4,37 +4,39 @@ export const App = () => {
   const { events, selections, handleAddSelection } = useApp();
 
   return (
-    <div>
-      <div>
+    <div className="flex flex-col items-center justify-around gap-6 bg-green-400 pt-4 px2">
+      <div className="flex flex-col items-center justify-around gap-4">
         {events.map(
           (sportEvent) =>
             sportEvent.markets[0] && (
               <div key={sportEvent.id}>
-                <div>
+                <div className="border-solid border-2 border-gray-500 p-4">
                   <span>{sportEvent.name}</span>
                 </div>
-                {sportEvent.markets.map((market) => (
-                  <div key={market.id}>
-                    {market.name}
-                    <div className="flex">
-                      {market.selections.map((selection) => (
-                        <button
-                          key={selection.id}
-                          className="flex flex-col"
-                          onClick={() => handleAddSelection(selection)}
-                        >
-                          <div>{selection.name}</div>
-                          <div>{selection.price}</div>
-                        </button>
-                      ))}
+                <div className="border-solid border-2 border-gray-500">
+                  {sportEvent.markets.map((market) => (
+                    <div key={market.id} className="border-2 border-gray-500">
+                      <div className="font-thin">{market.name}</div>
+                      <div className="flex justify-evenly">
+                        {market.selections.map((selection) => (
+                          <button
+                            key={selection.id}
+                            className="flex flex-col border rounded p-1"
+                            onClick={() => handleAddSelection(selection)}
+                          >
+                            <div>{selection.name}</div>
+                            <div>{selection.price}</div>
+                          </button>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             )
         )}
       </div>
-      <div>
+      <div className="bg-red-500">
         <div>Selections</div>
         {selections.map((userSelection) => (
           <div key={userSelection.id} className="flex flex-col">
