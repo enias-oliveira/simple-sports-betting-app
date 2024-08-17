@@ -1,10 +1,11 @@
+import { Selections } from "./Selections";
 import { useApp } from "./use-app";
 
 export const App = () => {
-  const { events, selections, handleAddSelection } = useApp();
+  const { events, handleAddSelection } = useApp();
 
   return (
-    <div className="flex flex-col items-center justify-around gap-6  pt-4 px2">
+    <div className="flex flex-col items-center justify-around gap-6  pt-4 px-2">
       <div className="flex flex-col items-center justify-around gap-4">
         {events.map(
           (sportEvent) =>
@@ -23,7 +24,7 @@ export const App = () => {
                         {market.selections.map((selection) => (
                           <button
                             key={selection.id}
-                            className="flex-1 flex-col border rounded text-[0.5rem]"
+                            className="flex-1 flex-col border rounded text-[0.5rem] hover:bg-green-500 focus:outline-none"
                             onClick={() => handleAddSelection(selection)}
                           >
                             <div>{selection.name}</div>
@@ -38,15 +39,7 @@ export const App = () => {
             )
         )}
       </div>
-      <div className="bg-red-500">
-        <div>Selections</div>
-        {selections.map((userSelection) => (
-          <div key={userSelection.id} className="flex flex-col">
-            <div>{userSelection.name}</div>
-            <div>{userSelection.price}</div>
-          </div>
-        ))}
-      </div>
+      <Selections />
     </div>
   );
 };
